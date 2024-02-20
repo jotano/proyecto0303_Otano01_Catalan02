@@ -40,6 +40,21 @@ print(baterect)
 # Pongo el bate en la parte inferior de la pantalla
 baterect.move_ip(440,650)
 
+# Crea el objeto ladrillo
+ladrillo = pygame.image.load("ladrillo.jpg")
+ladrillo = pygame.transform.scale(ladrillo, (100, 40))
+
+# Definir la clase para los ladrillos
+class Ladrillo(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        super().__init__()
+        self.image = ladrillo
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (x, y)
+
+# Crear una lista de ladrillos
+ladrillos = [Ladrillo(x * 120, y * 50) for x in range(9) for y in range(2)]
+
 game_over_image = pygame.image.load("GAMEOVER.png")
 
 #Configuramos la fuente para mostrar el texto
@@ -47,7 +62,6 @@ fuente = pygame.font.Font("PIXEL8bit.ttf", 80)
 
 # Variables para el contador de golpes y la velocidad de la pelota
 contador_golpes = 0
-
 
 jugando = True
 while jugando:
@@ -81,6 +95,12 @@ while jugando:
             speedball[1] /= 2.197
         # Cada cuarto golpe, restablece la velocidad original
    
+ # Comprobar colisiones con los ladrillos
+    for ladrillo in ladrillos:
+        if ballrect.colliderect(ladrillo.rect):
+            speedball[1] = -speedball[1]
+            ladrillos.remove(ladrillo)
+            
 
     # Muevo la pelota
     ballrect = ballrect.move(speedball)
@@ -110,6 +130,9 @@ while jugando:
     ventana.fill((0, 0, 0))
     ventana.blit(fondo, (0,0))
 
+    # Dibujar los ladrillos
+    for ladrillo in ladrillos:
+        ventana.blit(ladrillo.image, ladrillo.rect)
 
     # Dibujo la pelota
     ventana.blit(ball, ballrect)
