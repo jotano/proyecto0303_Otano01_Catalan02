@@ -24,7 +24,7 @@ speedball = [5,5]
 ballrect = ball.get_rect()
 
 # Lugar de inicio de la bola
-ballrect.move_ip(0,0)
+ballrect.move_ip(340,550)
 
 # Crea el objeto bate, y obtengo su rectángulo
 bate = pygame.image.load("nuke(barra)3.png")
@@ -53,7 +53,7 @@ class Ladrillo(pygame.sprite.Sprite):
         self.rect.topleft = (x, y)
 
 # Crear una lista de ladrillos
-ladrillos = [Ladrillo(x * 120, y * 50) for x in range(9) for y in range(2)]
+ladrillos = [Ladrillo(x * 120, y * 50) for x in range(9) for y in range(4)]
 
 game_over_image = pygame.image.load("GAMEOVER.png")
 
@@ -72,9 +72,9 @@ while jugando:
     # Compruebo si se ha pulsado alguna tecla, y establece la velocidad del bate
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
-        baterect = baterect.move(-10,0)
+        baterect = baterect.move(-12,0)
     if keys[pygame.K_RIGHT]:
-        baterect = baterect.move(10,0)
+        baterect = baterect.move(12,0)
 
     # Compruebo si hay colisión
     if baterect.colliderect(ballrect):
@@ -98,6 +98,7 @@ while jugando:
  # Comprobar colisiones con los ladrillos
     for ladrillo in ladrillos:
         if ballrect.colliderect(ladrillo.rect):
+            speedball[0] = -speedball[0]
             speedball[1] = -speedball[1]
             ladrillos.remove(ladrillo)
             
@@ -122,9 +123,9 @@ while jugando:
 
     # Establece colision del bate con las paredes de la ventana
     if baterect.left < 0:
-       baterect = baterect.move(10,0)
+       baterect = baterect.move(12,0)
     if baterect.right > ventana.get_width():
-        baterect = baterect.move(-10,0)
+        baterect = baterect.move(-12,0)
     
     #establece el fondo como una imagen, fill evita trazado de la bola
     ventana.fill((0, 0, 0))
