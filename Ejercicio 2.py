@@ -5,6 +5,8 @@ pygame.init()
 ventana = pygame.display.set_mode((1080,720))
 pygame.display.set_caption("ejercicio 3")
 
+MAX_SPEED = 10.985
+
 # Crea el objeto pelota
 ball = pygame.image.load("OBAMNA.png")
 
@@ -13,7 +15,7 @@ fondo = pygame.image.load("IraqBackground.png")
 ventana.blit(fondo, (0,0))
 
 # Transforma el tamaño del objeto ball
-ball = pygame.transform.scale(ball, (50, 70))
+ball = pygame.transform.scale(ball, (70, 98 ))
 
 # Inicializo los valores con los que se van a mover la pelota
 speedball = [5,5]
@@ -63,16 +65,20 @@ while jugando:
     # Compruebo si hay colisión
     if baterect.colliderect(ballrect):
         speedball[1] = -speedball[1]
-        contador_golpes = contador_golpes + 1
-        
-    
-        # Aumenta la velocidad de la pelota en 2 con cada golpe
-        speedball[0] += 1
-        speedball[1] += 1
+       
+        speedball[0] *= 1.3
+        speedball[1] *= 1.3
+
+    # Limita la velocidad máxima
+        speedball[0] = min(speedball[0], MAX_SPEED)
+        speedball[1] = min(speedball[1], MAX_SPEED)
+
+        contador_golpes += 1
 
         if contador_golpes % 4 == 0:
-            speedball = [5,5]
-
+        # Restablece la velocidad de la pelota
+            speedball[0] /= 2.197
+            speedball[1] /= 2.197
         # Cada cuarto golpe, restablece la velocidad original
    
 
