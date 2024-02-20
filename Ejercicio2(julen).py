@@ -100,7 +100,6 @@ while jugando:
         if ballrect.colliderect(ladrillo.rect):
             speedball[1] = -speedball[1]
             ladrillos.remove(ladrillo)
-            contador_golpes += 1
 
 
     # Muevo la pelota
