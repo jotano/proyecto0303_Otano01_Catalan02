@@ -5,6 +5,8 @@ pygame.init()
 ventana = pygame.display.set_mode((1080, 720))
 pygame.display.set_caption("ejercicio 3")
 
+MAX_SPEED = 10.985
+
 # Crea el objeto pelota
 ball = pygame.image.load("perro.png")
 
@@ -74,12 +76,32 @@ while jugando:
     if keys[pygame.K_RIGHT]:
         baterect = baterect.move(10, 0)
 
+ # Compruebo si hay colisión
+    if baterect.colliderect(ballrect):
+        speedball[1] = -speedball[1]
+       
+        speedball[0] *= 1.3
+        speedball[1] *= 1.3
+
+    # Limita la velocidad máxima
+        speedball[0] = min(speedball[0], MAX_SPEED)
+        speedball[1] = min(speedball[1], MAX_SPEED)
+
+        contador_golpes += 1
+
+        if contador_golpes % 4 == 0:
+        # Restablece la velocidad de la pelota
+            speedball[0] /= 2.197
+            speedball[1] /= 2.197
+        # Cada cuarto golpe, restablece la velocidad original
+
     # Comprobar colisiones con los ladrillos
     for ladrillo in ladrillos:
         if ballrect.colliderect(ladrillo.rect):
             speedball[1] = -speedball[1]
             ladrillos.remove(ladrillo)
             contador_golpes += 1
+
 
     # Muevo la pelota
     ballrect = ballrect.move(speedball)
