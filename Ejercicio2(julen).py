@@ -53,7 +53,7 @@ class Ladrillo(pygame.sprite.Sprite):
         self.rect.topleft = (x, y)
 
 # Crear una lista de ladrillos
-ladrillos = [Ladrillo(x * 120, y * 50) for x in range(9) for y in range(2)]
+ladrillos = [Ladrillo(x * 120, y * 50) for x in range(9) for y in range(4)]
 
 game_over_image = pygame.image.load("gameover(julen).webp")
 
