@@ -7,6 +7,12 @@ pygame.display.set_caption("ejercicio 3")
 
 MAX_SPEED = 10.985
 
+# Carga el archivo de musica
+pygame.mixer.music.load("tonosmovil.net_himno_psoe.mp3")
+
+# Empieza la musica (-1, es un loop infinito)
+pygame.mixer.music.play(-1)
+
 # Crea el objeto pelota
 ball = pygame.image.load("perro.png")
 
@@ -24,13 +30,13 @@ speedball = [5, 5]
 ballrect = ball.get_rect()
 
 # Lugar de inicio de la bola
-ballrect.move_ip(0, 0)
+ballrect.move_ip(120,220)
 
 # Crea el objeto bate, y obtengo su rectángulo
 bate = pygame.image.load("barra(perro).png")
 
 # Transforma el tamaño del objeto bate
-bate = pygame.transform.scale(bate, (100, 80))
+bate = pygame.transform.scale(bate, (120,80))
 
 # Transforma el tamaño de la imagen de fondo
 fondo = pygame.transform.scale(fondo, (1080, 720))
@@ -41,7 +47,7 @@ print(baterect)
 baterect.move_ip(440, 650)
 
 # Crea el objeto ladrillo
-ladrillo = pygame.image.load("ladrillo.jpg")
+ladrillo = pygame.image.load("poliedro.jpg")
 ladrillo = pygame.transform.scale(ladrillo, (100, 40))
 
 # Definir la clase para los ladrillos
@@ -100,7 +106,6 @@ while jugando:
         if ballrect.colliderect(ladrillo.rect):
             speedball[1] = -speedball[1]
             ladrillos.remove(ladrillo)
-            contador_golpes += 1
 
 
     # Muevo la pelota
