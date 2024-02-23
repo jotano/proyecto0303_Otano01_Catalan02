@@ -21,7 +21,7 @@ fondo = pygame.image.load("fondo(Sanche).Webp")
 ventana.blit(fondo, (0, 0))
 
 # Transforma el tamaño del objeto ball
-ball = pygame.transform.scale(ball, (140, 200))
+ball = pygame.transform.scale(ball, (70, 98))
 
 # Inicializo los valores con los que se van a mover la pelota
 speedball = [5, 5]
@@ -36,7 +36,7 @@ ballrect.move_ip(120,220)
 bate = pygame.image.load("barra(perro).png")
 
 # Transforma el tamaño del objeto bate
-bate = pygame.transform.scale(bate, (120,80))
+bate = pygame.transform.scale(bate, (140,80))
 
 # Transforma el tamaño de la imagen de fondo
 fondo = pygame.transform.scale(fondo, (1080, 720))
