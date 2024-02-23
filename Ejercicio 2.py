@@ -5,7 +5,14 @@ pygame.init()
 ventana = pygame.display.set_mode((1080,720))
 pygame.display.set_caption("ejercicio 3")
 
+
 MAX_SPEED = 10.985
+
+# Carga el archivo de musica
+pygame.mixer.music.load("the-star-spangled-banner-113772.mp3")
+
+# Empieza la musica (-1, es un loop infinito)
+pygame.mixer.music.play(-1)
 
 # Crea el objeto pelota
 ball = pygame.image.load("OBAMNA.png")
@@ -102,7 +109,7 @@ while jugando:
             speedball[1] = -speedball[1]
             ladrillos.remove(ladrillo)
             
-
+    
     # Muevo la pelota
     ballrect = ballrect.move(speedball)
     
