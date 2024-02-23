@@ -48,7 +48,7 @@ print(baterect)
 baterect.move_ip(440,650)
 
 # Crea el objeto ladrillo
-ladrillo = pygame.image.load("ladrillo.jpg")
+ladrillo = pygame.image.load("fotoURSS.png")
 ladrillo = pygame.transform.scale(ladrillo, (100, 40))
 
 # Definir la clase para los ladrillos
