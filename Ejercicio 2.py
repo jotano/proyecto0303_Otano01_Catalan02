@@ -5,7 +5,14 @@ pygame.init()
 ventana = pygame.display.set_mode((1080,720))
 pygame.display.set_caption("ejercicio 3")
 
+
 MAX_SPEED = 10.985
+
+# Carga el archivo de musica
+pygame.mixer.music.load("the-star-spangled-banner-113772.mp3")
+
+# Empieza la musica (-1, es un loop infinito)
+pygame.mixer.music.play(-1)
 
 # Crea el objeto pelota
 ball = pygame.image.load("OBAMNA.png")
@@ -24,7 +31,7 @@ speedball = [5,5]
 ballrect = ball.get_rect()
 
 # Lugar de inicio de la bola
-ballrect.move_ip(0,0)
+ballrect.move_ip(340,550)
 
 # Crea el objeto bate, y obtengo su rectángulo
 bate = pygame.image.load("nuke(barra)3.png")
@@ -40,6 +47,21 @@ print(baterect)
 # Pongo el bate en la parte inferior de la pantalla
 baterect.move_ip(440,650)
 
+# Crea el objeto ladrillo
+ladrillo = pygame.image.load("fotoURSS.png")
+ladrillo = pygame.transform.scale(ladrillo, (100, 40))
+
+# Definir la clase para los ladrillos
+class Ladrillo(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        super().__init__()
+        self.image = ladrillo
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (x, y)
+
+# Crear una lista de ladrillos
+ladrillos = [Ladrillo(x * 120, y * 50) for x in range(9) for y in range(4)]
+
 game_over_image = pygame.image.load("GAMEOVER.png")
 
 #Configuramos la fuente para mostrar el texto
@@ -47,7 +69,6 @@ fuente = pygame.font.Font("PIXEL8bit.ttf", 80)
 
 # Variables para el contador de golpes y la velocidad de la pelota
 contador_golpes = 0
-
 
 jugando = True
 while jugando:
@@ -58,9 +79,9 @@ while jugando:
     # Compruebo si se ha pulsado alguna tecla, y establece la velocidad del bate
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
-        baterect = baterect.move(-10,0)
+        baterect = baterect.move(-12,0)
     if keys[pygame.K_RIGHT]:
-        baterect = baterect.move(10,0)
+        baterect = baterect.move(12,0)
 
     # Compruebo si hay colisión
     if baterect.colliderect(ballrect):
@@ -81,7 +102,14 @@ while jugando:
             speedball[1] /= 2.197
         # Cada cuarto golpe, restablece la velocidad original
    
-
+ # Comprobar colisiones con los ladrillos
+    for ladrillo in ladrillos:
+        if ballrect.colliderect(ladrillo.rect):
+            speedball[0] = -speedball[0]
+            speedball[1] = -speedball[1]
+            ladrillos.remove(ladrillo)
+            
+    
     # Muevo la pelota
     ballrect = ballrect.move(speedball)
     
@@ -102,14 +130,17 @@ while jugando:
 
     # Establece colision del bate con las paredes de la ventana
     if baterect.left < 0:
-       baterect = baterect.move(10,0)
+       baterect = baterect.move(12,0)
     if baterect.right > ventana.get_width():
-        baterect = baterect.move(-10,0)
+        baterect = baterect.move(-12,0)
     
     #establece el fondo como una imagen, fill evita trazado de la bola
     ventana.fill((0, 0, 0))
     ventana.blit(fondo, (0,0))
 
+    # Dibujar los ladrillos
+    for ladrillo in ladrillos:
+        ventana.blit(ladrillo.image, ladrillo.rect)
 
     # Dibujo la pelota
     ventana.blit(ball, ballrect)
