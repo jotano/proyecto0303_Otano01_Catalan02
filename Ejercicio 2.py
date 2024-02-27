@@ -125,8 +125,7 @@ while jugando:
                                             (ventana.get_height() - game_over_image.get_height()) / 2))
 
             pygame.display.flip()
-            pygame.time.delay(2000)  # Delay for 2 seconds before closing the game
-            jugando = False
+            pygame.time.delay(2000)  # Delay de 2 seegundos antes de cerrar
 
     # Establece colision del bate con las paredes de la ventana
     if baterect.left < 0:
