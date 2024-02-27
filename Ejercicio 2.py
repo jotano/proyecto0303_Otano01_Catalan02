@@ -52,12 +52,7 @@ ladrillo = pygame.image.load("fotoURSS.png")
 ladrillo = pygame.transform.scale(ladrillo, (100, 40))
 
 # Definir la clase para los ladrillos
-class Ladrillo(pygame.sprite.Sprite):
-    def __init__(self, x, y):
-        super().__init__()
-        self.image = ladrillo
-        self.rect = self.image.get_rect()
-        self.rect.topleft = (x, y)
+ç
 
 # Crear una lista de ladrillos
 ladrillos = [Ladrillo(x * 120, y * 50) for x in range(9) for y in range(4)]
@@ -125,7 +120,8 @@ while jugando:
                                             (ventana.get_height() - game_over_image.get_height()) / 2))
 
             pygame.display.flip()
-            pygame.time.delay(2000)  # Delay de 2 seegundos antes de cerrar
+            pygame.time.delay(2000)  # Delay de 2 seegundos antes
+           
 
     # Establece colision del bate con las paredes de la ventana
     if baterect.left < 0:
