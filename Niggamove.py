@@ -8,3 +8,4 @@ def fmax(serie):
     
     return(max)
 
+print("Serie", serie)
