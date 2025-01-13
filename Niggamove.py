@@ -9,3 +9,4 @@ def fmax(serie):
     return(max)
 
 print("Serie", serie)
+print("\nMax Number:", fmax(serie))
